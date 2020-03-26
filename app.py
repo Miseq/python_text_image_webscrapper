@@ -1,21 +1,26 @@
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, render_template
 import requests
 import sys
-from bs4 import BeautifulSoup as bs
-from scrapper import get_source
+from flask import request
+from scrapper import Scraper
 from flask.views import MethodView
 
 app = Flask(__name__)
+scraper = Scraper()
 
 class Getting_all(MethodView):
 
     @staticmethod
     def get():
-        return 'Hello mordo'
+        return render_template("index.html")
 
     @staticmethod
-    def put():
-        print(get_source('https://text.npr.org'))
+    def post():
+        r = request.get_json()
+        scraper.url = r.get('url')
+        output = scraper.get_images()
+
+        return make_response(jsonify(output),200)
 
 
 
