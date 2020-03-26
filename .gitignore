@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 /venvv
 .idea
+downloads
 # C extensions
 *.so
 
