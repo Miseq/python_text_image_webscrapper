@@ -18,7 +18,7 @@ class Getting_all(MethodView):
     def post():
         r = request.get_json()
         scraper.url = r.get('url')
-        output = scraper.get_images()
+        output = scraper.save_to_zip(download_images=True, download_text=True)
 
         return make_response(jsonify(output),200)
 
