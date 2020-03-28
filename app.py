@@ -1,27 +1,41 @@
 from flask import Flask, make_response, jsonify, render_template
-import requests
-import sys
+import validators
 from flask import request
-from scrapper import Scraper
 from flask.views import MethodView
+from file_manager import FileManager
 
 app = Flask(__name__)
-scraper = Scraper()
+downloader = FileManager()
 
 class Getting_all(MethodView):
 
     @staticmethod
     def get():
+        #TODO wywalic albo dac opis korzystania jako odpowiedz
         return render_template("index.html")
 
     @staticmethod
     def post():
         r = request.get_json()
-        scraper.url = r.get('url')
-        output = scraper.save_to_zip(download_images=True, download_text=True)
-
+        downloader.scraper.url = r.get('url')
+        if validators.url(downloader.scraper.url):
+            download_option = r.get('option')
+            if download_option == "all":
+                output = downloader.save_to_zip(download_images=True, download_text=True)
+            elif download_option == "text":
+                output = downloader.save_to_zip(download_text=True)
+            elif download_option == "images":
+                output = downloader.save_to_zip(download_images=True)
+            else:
+                output = "Nie podano rodzaju pobiernaia, wpisz jedno: 'option': 'all'/'text'/'images'"
+        else:
+            output = "URL jest bledny!"
         return make_response(jsonify(output),200)
 
+
+    def put(self):
+        # takie jak post
+        return self.post()
 
 
 app.add_url_rule("/", view_func=Getting_all.as_view("getting_all"))
