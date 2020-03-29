@@ -29,12 +29,14 @@ class FileManager():
     def create_logs(self,zip_file_name=None, text=False, imgs_urls= None):
         if imgs_urls == None: # zmieniam tutaj, gdyz nie powinno sie dawa mutowalnych wartosci jako domyslnych arg
             imgs_urls = []
-        template_txt = f"{datetime.datetime.now()}--Downloaded: {zip_file_name} in directory: {self.tmp_download_dir}"\
+        template_txt = f"{datetime.datetime.now().date()}--Downloaded: " \
+                       f"{zip_file_name} in directory: {self.tmp_download_dir}"\
                        f"Text:{text} Number of images: {len(imgs_urls)} \n"
-        with open("logs.txt", "w") as file:
+        with open("logs.txt", "w", encoding="utf-8") as file:
             file.write(template_txt)
 
     def save_to_zip(self, download_images=False, download_text=False):
+        self.cleanup() # gdyby zostaly foldery tmp po poprzednim
         text, img_urls = None, None
         if download_text:
             text = self.scraper.get_text_from_website()
