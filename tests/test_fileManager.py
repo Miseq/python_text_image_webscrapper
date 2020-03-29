@@ -5,8 +5,8 @@ import tldextract
 import pathlib
 import os
 
-class TestFileManager(TestCase):
 
+class TestFileManager(TestCase):
 
     def test_make_zip_file_name(self):
         test_url = "https://semantive.com/pl/"
@@ -14,7 +14,7 @@ class TestFileManager(TestCase):
         now = datetime.now()
         domain = tldextract.extract(test_url).domain
         correct_form = f"{domain}--{now.year}_{now.month}_{now.day}--{now.hour}_{now.minute}"
-        self.assertEqual(test_manager.make_zip_file_name(images=True,text=True), f"{correct_form}--images_text.zip")
+        self.assertEqual(test_manager.make_zip_file_name(images=True, text=True), f"{correct_form}--images_text.zip")
         self.assertEqual(test_manager.make_zip_file_name(images=True, text=False), f"{correct_form}--images.zip")
         self.assertEqual(test_manager.make_zip_file_name(images=False, text=True), f"{correct_form}--_text.zip")
 
@@ -25,7 +25,7 @@ class TestFileManager(TestCase):
         os.remove("logs.txt")
 
     def test_save_to_zip(self):
-        test_url = "https://www.google.pl" # szybsze
+        test_url = "https://www.google.pl"  # szybsze
         test_manager = FileManager(test_url)
         now = datetime.now()
         domain = tldextract.extract(test_url).domain
@@ -51,4 +51,3 @@ class TestFileManager(TestCase):
         self.assertTrue(not os.path.exists(test_manager.tmp_download_dir))
         os.remove("logs.txt")
         os.remove(file_path)
-

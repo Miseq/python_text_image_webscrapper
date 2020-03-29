@@ -1,11 +1,10 @@
 from unittest import TestCase
 
 
-class TestGetting_all(TestCase):
+class TestGettingAll(TestCase):
     def test_get(self):
-        #TODO
+        # TODO
         self.fail()
 
     def test_post(self):
         pass
-

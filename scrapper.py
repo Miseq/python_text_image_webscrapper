@@ -1,8 +1,9 @@
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup as Bs
 import requests
 import tldextract
 import validators
 from pathlib import Path
+
 
 class Scraper:
     def __init__(self, url):
@@ -19,33 +20,30 @@ class Scraper:
     def get_data_from_website(self):
         r = requests.get(self.url)
         if r.status_code == 200:
-            return bs(r.text, features="html.parser")
+            return Bs(r.text, features="html.parser")
         else:
             return None
 
-
     def get_text_from_website(self):
-        # TODO sprawdzic czy przez pobranie tylko <p> bd lepiej albo inaczej niz .text
         data = self.get_data_from_website()
-        if data != None:
-            txt_only = data.get_text()
+        if data is not None:
+            txt_only = data.get_text()  # najbardziej optymalne i elastyczne rozwiazania jakie znalazlem
             return txt_only
         else:
             return data
 
-
     def get_images_urls(self):
-
         data = self.get_data_from_website()
-        if data != None:
-            imgs = data.find_all("img",{"src":True})
-            imgs_urls = [ link['src'] for link in imgs if link['src'] != ""]
+        if data is not None:
+            imgs = data.find_all("img", {"src": True})
+            imgs_urls = [link['src'] for link in imgs if link['src'] != ""]
             valid_urls = self.check_image_urls(imgs_urls)
             return valid_urls
         else:
             return data
-
-    def download_image(self, img, img_number, download_path):
+        
+    @staticmethod
+    def download_image(img, img_number, download_path):
 
         file_extension = img.split(".")[-1]
         if len(file_extension) > 5:
@@ -68,8 +66,8 @@ class Scraper:
 
     def repair_invalid_image_url(self, url):
         # cztery najczestsze napotkane podczas robienia zadania bledy w url
-        url = url.replace(" ","")
-        tmp_url = url # zdarzylo sie kilka razy
+        url = url.replace(" ", "")
+        tmp_url = url  # zdarzylo sie kilka razy
         if url[0:2] == "//":
             tmp_url = f"http:{url}"
         elif url[0] == "/":
@@ -84,7 +82,7 @@ class Scraper:
             domain = '.'.join(ext_list[:])
             tmp_url = f"http://{domain}{url}"
 
-        if not validators.url(tmp_url): # jesli usterka nie zostala usunieta
-                tmp_url = "0"
+        if not validators.url(tmp_url):  # jesli usterka nie zostala usunieta to usuwamy z listy linkow
+            tmp_url = "0"
 
-        return tmp_url # should be valid OR 0
+        return tmp_url  # should be valid OR 0
