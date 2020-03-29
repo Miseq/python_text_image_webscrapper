@@ -4,6 +4,7 @@ from flask import request
 from flask.views import MethodView
 from file_manager import FileManager
 
+
 app = Flask(__name__)
 downloader = FileManager()
 
@@ -47,4 +48,4 @@ class GettingAll(MethodView):
 app.add_url_rule("/", view_func=GettingAll.as_view("GettingAll"))
 
 if __name__ == '__main__':
-    app.run('127.0.0.1', 5000, debug=False)
+    app.run('0.0.0.0', 5000, debug=False)

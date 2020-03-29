@@ -1,0 +1,8 @@
+version: '3.0'
+services:
+  web:
+    build: ./application
+    ports:
+    - "5000:5000"
+    volumes:
+    - ./output:/semantive/output

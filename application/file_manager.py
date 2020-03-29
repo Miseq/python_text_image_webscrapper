@@ -24,7 +24,18 @@ class FileManager:
             file_name = f"{file_name}images"
         if text:
             file_name = f"{file_name}_text"
+
+
+        i = 1
+        while os.path.exists(file_name):  # dodatkowe zabezpieczenie przed nadpisaniem
+            file_name = f"{file_name}({i})"
+            i += 1
         file_name = f"{file_name}.zip"
+        file_name = f"{file_name}"
+
+        self.create_dir_if_dosent_exist('output')
+
+        file_name = f"output/{file_name}"
         return file_name
 
     def create_logs(self, zip_file_name=None, text=False, imgs_urls=None):
@@ -33,7 +44,7 @@ class FileManager:
         template_txt = f"{datetime.datetime.now().date()}--Downloaded: " \
                        f"{zip_file_name} in directory: {self.tmp_download_dir}" \
                        f"Text: {'True' if text is not None else 'False'} Number of images: {len(imgs_urls)} \n"
-        with open("logs.txt", "a", encoding="utf-8") as file:
+        with open("output/logs.txt", "a", encoding="utf-8") as file:
             file.write(template_txt)
 
     def save_to_zip(self, download_images=False, download_text=False):
@@ -44,8 +55,7 @@ class FileManager:
         if download_images:
             img_urls = self.scraper.get_images_urls()
         zip_file_name = self.make_zip_file_name(download_images, download_text)
-        self.make_tmp_dwnld_dir()  # jesli nie istnieje to tworzy tymczasowy folder pobierania
-
+        self.create_dir_if_dosent_exist(self.tmp_download_dir)
         with ZipFile(zip_file_name, "w") as zip_file:
             # pobranie obrazow
             if img_urls is not None:
@@ -65,11 +75,11 @@ class FileManager:
 
         self.create_logs(zip_file_name, text, img_urls)
         self.cleanup()
-        return f"Items saved in zip_file: {zip_file_name} in dir: {self.tmp_download_dir}"
+        return f"Items saved in zip_file: {zip_file_name}"
 
-    def make_tmp_dwnld_dir(self):
-        if not os.path.exists(self.tmp_download_dir):
-            os.mkdir(self.tmp_download_dir)
+    def create_dir_if_dosent_exist(self, name):
+        if not os.path.exists(name):
+            os.mkdir(name)
 
     def cleanup(self):
         try:

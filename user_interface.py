@@ -33,7 +33,7 @@ def print_logs():
 
     if os.path.exists("logs.txt"):
         with open("logs.txt", "r", encoding='utf-8') as logs:
-            print(logs)
+            print(logs.read())
     else:
         print("Logs hasn't been made or ")
 
@@ -42,16 +42,16 @@ def show_interface(app_url, app_port):
 
     while True:
         print_basic_menu()
-        user_input = int(input('->'))
-        if user_input == 1 or user_input == 2 or user_input == 3:
+        user_input = input('->')
+        if user_input == '1' or user_input == '2' or user_input == '3':
             download_menu(user_input, app_url, app_port)
-        elif user_input == 4:
-            pass  # TODO
-        elif user_input == 5:
+        elif user_input == '4':
+            print_logs()
+        elif user_input == '5':
             pass
-        elif user_input == 6:
+        elif user_input == '6':
             print_basic_menu()
-        elif user_input == 0:
+        elif user_input == '0':
             break
         else:
             print("Input hasn't been recognized!")
@@ -59,4 +59,4 @@ def show_interface(app_url, app_port):
 
 if __name__ == '__main__':
     # TODO dodac argparsa o url i port apki
-    show_interface('127.0.0.1', 5000)
+    show_interface('0.0.0.0', 5000)

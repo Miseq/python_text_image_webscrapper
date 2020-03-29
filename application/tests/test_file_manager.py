@@ -35,9 +35,9 @@ class TestFileManager(TestCase):
         os.remove("logs.txt")
         os.remove(file_path)
 
-    def test_make_tmp_dwnld_dir(self):
+    def test_create_dir_if_dosent_exist(self):
         test_manager = FileManager("")
-        test_manager.make_tmp_dwnld_dir()
+        test_manager.create_dir_if_dosent_exist(test_manager.tmp_download_dir)
         self.assertTrue(os.path.exists(test_manager.tmp_download_dir))
         os.rmdir(test_manager.tmp_download_dir)
 

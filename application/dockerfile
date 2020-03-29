@@ -1,0 +1,15 @@
+FROM python:3
+WORKDIR /semantive
+
+ENV FLASK_APP app.py
+ENV FLASK_RUN_HOST 0.0.0.0
+
+
+COPY requirements.txt requirements.txt
+COPY . .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+CMD mkdir /semantive/output
+
+CMD ["flask", "run"]
