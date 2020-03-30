@@ -83,7 +83,9 @@ tekstowej z nazwą pliku do którego media zostały zapisane
 
 # Komentarz autora:
 Według mnie aplikacja działa całkiem dobrze, jest na tyle zautomatyzowana, że można korzystać wykorzystując jedynie interfejs użytkownika, nie trzeba przejmować się zarządzaniem plikami, poprawnością url, oraz sprawdzaniem czy adresy url obrazów są ok.
-Nie ma rzeczy która poszłaby jakoś fatalnie. Na pewno widzę możliwości rozbudowy, typu frontend, dodanie opcji wczytania listy adresów do pobrania z pliku oraz pobierania ich po kolei(nie zdążyłem tego dodać), rozbudowa testów i pełna implementacja CI/CI.
+Nie ma rzeczy która poszłaby jakoś fatalnie. Na pewno widzę możliwości rozbudowy, typu frontend, dodanie opcji wczytania listy adresów do pobrania z pliku oraz pobierania ich po kolei(nie zdążyłem tego dodać), rozbudowa testów i pełna implementacja CI/CD.
 Dodanie progres baru przy pobieraniu, jednak to drobnostka bo wysyłając posta z Postmana lub curla i tak nie będzie go widać.
 Do zmian chyba nie ma wiele, może trochę przejrzystości kodu ale to jakiś mid-senior musiałby popatrzeć. Sama składnia powinna być okej, sprawdzałe wielokrotnie pod względem  PEP8 i poza jednym czy dwoma wyjątkami wszystkie pliki są z nim zgodne.
+Najbardziej dumny w tym projekcie jest z zaimplementowanie zapisywania do automatycznie generowanych archiwów zip, dzięki czemu nawet przy dużej ilości pobrań wszystko jest przejrzyste i łatwe w zarządzaniu.
+Logi też mi się podobają.
 Jeśli masz jakieś pytania kontaktuj się śmiało.
