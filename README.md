@@ -80,3 +80,10 @@ tekstowej z nazwą pliku do którego media zostały zapisane
 
 - Aplikacja Flask zwraca tę odpowiedź jako JSON oraz kod 200
 
+
+# Komentarz autora:
+Według mnie aplikacja działa całkiem dobrze, jest na tyle zautomatyzowana, że można korzystać wykorzystując jedynie interfejs użytkownika, nie trzeba przejmować się zarządzaniem plikami, poprawnością url, oraz sprawdzaniem czy adresy url obrazów są ok.
+Nie ma rzeczy która poszłaby jakoś fatalnie. Na pewno widzę możliwości rozbudowy, typu frontend, dodanie opcji wczytania listy adresów do pobrania z pliku oraz pobierania ich po kolei(nie zdążyłem tego dodać), rozbudowa testów i pełna implementacja CI/CI.
+Dodanie progres baru przy pobieraniu, jednak to drobnostka bo wysyłając posta z Postmana lub curla i tak nie będzie go widać.
+Do zmian chyba nie ma wiele, może trochę przejrzystości kodu ale to jakiś mid-senior musiałby popatrzeć. Sama składnia powinna być okej, sprawdzałe wielokrotnie pod względem  PEP8 i poza jednym czy dwoma wyjątkami wszystkie pliki są z nim zgodne.
+Jeśli masz jakieś pytania kontaktuj się śmiało.
