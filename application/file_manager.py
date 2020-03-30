@@ -43,7 +43,8 @@ class FileManager:
             imgs_urls = []
         template_txt = f"{datetime.datetime.now().date()}--Downloaded: " \
                        f"{zip_file_name} in directory: {self.tmp_download_dir}" \
-                       f"Text: {'True' if text is not None else 'False'} Number of images: {len(imgs_urls)} \n"
+                       f"Text: {'True' if text is not None else 'False'} Number of images: {len(imgs_urls)} " \
+                       f"From: {self.scraper.url}\n"
         with open("output/logs.txt", "a", encoding="utf-8") as file:
             file.write(template_txt)
 
