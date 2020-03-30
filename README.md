@@ -18,7 +18,8 @@
 "option": "all <ALBO> text <ALBO> images"
 }
 ```
-aby pobrać odpowiednio: wszystko, tylko tekst, tylko obrazy z danego adresu url.
+aby pobrać odpowiednio: wszystko, tylko tekst, tylko obrazy z danego adresu url. Można też wysłać polecenie GET aby
+uzyskać info o składni polecenia POST.
 
 - Skorzystanie z **user_interface** uruchamiając go:
 ```shell script
